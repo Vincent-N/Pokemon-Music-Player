@@ -24,6 +24,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.pokemonmusicplayer.ui.ChooseLocationScreen
 import com.example.pokemonmusicplayer.ui.SelectSongScreen
 import com.example.pokemonmusicplayer.ui.theme.PokemonMusicPlayerTheme
 
@@ -41,7 +42,8 @@ class MainActivity : ComponentActivity() {
 
 enum class AppScreens() {
     Start,
-    InsertLocation
+    SelectSong,
+    ChooseLocation
 }
 
 @Preview
@@ -58,15 +60,28 @@ fun PokemonApp(
             val context = LocalContext.current
             PokemonStartScreen(
                 onStartButtonClicked = {
-                    navController.navigate(AppScreens.InsertLocation.name)
+                    navController.navigate(AppScreens.SelectSong.name)
                 }
             )
         }
 
-        composable(route = AppScreens.InsertLocation.name) {
+        composable(route = AppScreens.SelectSong.name) {
             SelectSongScreen(
                 passedInStringResource = R.string.back,
+                onSelectButtonClicked = { canContinue ->
+                    if (canContinue) {
+                        navController.navigate(AppScreens.ChooseLocation.name)
+                    }
+                },
                 onBackButtonClicked = { goBackToStart(navController) }
+            )
+        }
+
+        composable(route = AppScreens.ChooseLocation.name) {
+            ChooseLocationScreen(
+                onBackButtonClicked = {
+                    navController.popBackStack(AppScreens.SelectSong.name, inclusive = false)
+                }
             )
         }
     }
