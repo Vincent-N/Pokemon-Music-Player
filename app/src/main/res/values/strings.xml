@@ -2,4 +2,15 @@
     <string name="app_name">Pokemon Music Player</string>
     <string name="roll">Roll</string>
     <string name="start">Start</string>
+    <string name="testString">testingPassIn</string>
+    <string name="back">Back</string>
+    <string-array name="song_names_arrays">
+        <item>Select a Song</item>
+        <item>Song 1</item>
+        <item>Song 2</item>
+        <item>Song 3</item>
+        <item>Song 4</item>
+        <item>Song 5</item>
+        <item>Song 6</item>
+    </string-array>
 </resources>
